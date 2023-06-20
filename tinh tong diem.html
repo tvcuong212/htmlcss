@@ -1,0 +1,82 @@
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <title>Nhập điểm môn học</title>
+      <style>
+        body {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+}
+
+h1 {
+	color: #333;
+	text-align: center;
+}
+
+form {
+	margin: 0 auto;
+	max-width: 500px;
+}
+
+input[type=number] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
+
+input[type=button] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+      </style>
+      <script>
+        function calculateTotal(){
+var diemToan = parseFloat(document.getElementById("toan").value);
+var diemVan = parseFloat(document.getElementById("van").value);
+var diemAnh = parseFloat(document.getElementById("anh").value);
+
+diemToan *=2;
+diemVan *=2;
+
+var tongDiem = diemToan + diemVan + diemAnh;
+var result = "";
+
+if (tongDiem >=45) {
+    result = 'Đỗ Lê Quý Đôn và Quang Trung';
+} else if (tongDiem >=38) {
+    result = 'Đỗ Quang Trung!'
+} else {
+    result = 'Không Đỗ!'
+}
+
+document.getElementById("result").innerHTML = "Kết quả: " + result;
+}
+      </script>
+  </head>
+  <body>
+      <h1>Nhập điểm môn học</h1>
+      <form action="" method="post">
+          <label for="toan">Toán:</label>
+          <input type="number" step="0.01" id="toan" name="toan" min="0" max="10"><br><br>
+          <label for="van">Văn:</label>
+          <input type="number" step="0.01" id="van" name="van" min="0" max="10"><br><br>
+          <label for="anh">Anh:</label>
+          <input type="number" step="0.01" id="anh" name="anh" min="0" max="10"><br><br>
+
+        <input type="button" value="Tính tổng" onclick="calculateTotal()">
+        <div id="result"></div>
+
+      </form>
+
+  </body>
+  </html>
+</html>
