@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="D:\workspace\learn-js\style.css" class="">
+        <!-- Bootstrap CSS -->
+        <link data-require="bootstrap@4.0.5" data-semver="4.0.5" rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Java Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script>
+        var app = angular.module("myApp", []);
+    app.controller("myCtrl", function($scope){
+    console.log("My controller....");
+
+    $scope.users = [
+        {name: "Product One", price: "22.50"},
+        {name: "Product Two", price: "15.00"},
+        {name: "Product Four", price: "123.82"},
+        {name: "Product Five", price: "123.75"},
+    ];
+
+    $scope.addUser = function(){
+        $scope.users.push($scope.newUser);
+        $scope.newUser = {};
+        $scope.message = "New Product Added succesfully";
+    };
+
+    $scope.selectUser = function(user){
+        console.log(user);
+        $scope.clickedUser = user;
+    };
+
+    $scope.editUser = function(){
+        $scope.message = "Product Edited succesfully";
+    };
+
+    $scope.deleteUser = function(){
+        $scope.users.splice($scope.users.indexOf($scope.clickedUser));
+        $scope.message = "Product Deleted successfully";
+    };
+
+    $scope.clearMessage = function (){
+        $scope.message = "";
+    };
+});
+    </script>
+    <style>
+        .bordered {
+          border: 2px solid blue; 
+          padding: 10px; 
+        }
+      </style>
+    <link rel="stylesheet" href="D:\workspace\learn-js\style.css" class="">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="container-xl">
+        <h2>Angular 2 QuickStart</h2>
+        <button class="btn btn-primary float-md-left" type="button">Current User: Test@Test.com</button>
+        <br>
+        <br>
+        <button class="btn btn-success float-md-left" data-toggle="modal" type="button" 
+        data-target="#myModal">Add Product</button>
+        
+        <span class="clearfix"></span>
+        <div class="alert alert-success alert-dismissable" ng-if="message"><a href="#" class="close"
+            ng-click="clearMessage()">&times;</a>
+        <strong>{{message}}</strong></div>
+
+        
+        <div class="table-responsive " style="margin-top:18px;">
+            <table class="table table-striped bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users">
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" 
+                            data-target="#myModalEdit" ng-click="selectUser(user)"><i class="fa fa-edit"></i></button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" 
+                            data-target="#myModalDelete" ng-click="selectUser(user)" type="button"><i class="fa fa-trash"></i></button>
+                        </td>
+                        <td>{{user.name}}</td>
+                        <td>${{user.price}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Pop-up thêm sản phẩm -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Product</h4>
+                    <button class="close" type="button" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" action="">
+                        <div class="form-group">
+                            <label for="" class="control-label col-sm-5">Product Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="newUser.name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-sm-5">Product Price</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="newUser.price">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button class="btn btn-success" type="submit" ng-click="addUser()" data-dismiss="modal">Add Product</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sửa sản phẩm -->
+        <div class="modal fade " id="myModalEdit" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Product</h4>
+                        <button class="close" type="button" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="" class="control-label col-sm-5">Product Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="clickedUser.name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-sm-5">Product Price</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="clickedUser.price">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <button class="btn btn-default" type="submit" ng-click="editUser()"
+                                    data-dismiss="modal">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Xoá sản phẩm -->
+        <div class="modal fade" id="myModalDelete" role="dialog">
+            <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Product</h4>
+                <button class="close" type="button" data-dismiss="modal">x</button>
+
+            </div>
+            <div class="modal-body">
+                <strong style="color:red;">Are you sure you want to delete Product "{{clickedUser.name}}"  ? </strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteUser()">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+                </div>
+            </div>
+        </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+        <script src="D:\workspace\learn-js\index.js"></script>
+</html>
